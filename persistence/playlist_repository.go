@@ -170,7 +170,7 @@ func (r *playlistRepository) FindByPath(path string) (*model.Playlist, error) {
 }
 
 func (r *playlistRepository) findBy(sql Sqlizer) (*model.Playlist, error) {
-	sel := r.selectPlaylist().Where(sql)
+	sel := r.selectPlaylist().Where(sql).OrderBy("created_at DESC")
 	var pls []dbPlaylist
 	err := r.queryAll(sel, &pls)
 	if err != nil {
